@@ -1,0 +1,39 @@
+<hr class="my-2">
+<div class="d-flex justify-content-center">
+
+<div class="col-12 " >
+    <h2 class="display-8"> Статистика налоговых выплат</h2>
+  <div class="jumbotron">
+
+
+
+    <% if @payments_count == 0 %>
+
+    <h3>
+    <p class="lead">
+      Зарегистрированных налоговых выплат нет. <%= link_to " Попробуйте",  new_payment_path %>
+    </p>
+    </h3>
+
+
+
+    <% else %>
+
+    <div class="row">
+        <div class="col-6 " >
+            <%= pie_chart Payment.group(:taxes_system).count %>
+          </div>
+          <div class="col-6 " >
+            <%= scatter_chart Payment.pluck(:tax, :revenue), xtitle: "Tax", ytitle: "Revenue" %>
+            </div>
+
+
+    </div>
+
+
+
+    <% end %>
+
+</div>
+</div>
+</div>
